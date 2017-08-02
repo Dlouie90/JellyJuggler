@@ -12,15 +12,16 @@ import java.util.Random;
 /**
  * Created by Redfish on 7/17/2017.
  */
-
+// This class, BodyFactory is responsible for making the bodies of the jellies.
 public class BodyFactory {
     private World world;
 //    private static Random rng;
+    // cool way to code rng
     public static final int STEEL = 0;
     public static final int WOOD = 1;
     public static final int RUBBER = 2;
     public static final int STONE = 3;
-
+// Constructor that takes the world class
     public BodyFactory(World world){
         this.world = world;
     }
@@ -64,7 +65,7 @@ public class BodyFactory {
         return fixtureDef;
     }
 
-
+    // Overloading is involved
     public Body makeBoxPolyBody(float posx, float posy, float width, float height,int material, BodyDef.BodyType bodyType, int jellyType){
         return makeBoxPolyBody(posx, posy, width, height, material, bodyType, false, jellyType);
     }

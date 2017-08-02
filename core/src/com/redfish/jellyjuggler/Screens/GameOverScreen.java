@@ -12,24 +12,24 @@ import com.redfish.jellyjuggler.JellyJuggler;
 /**
  * Created by Redfish on 7/18/2017.
  */
-
+// When you lose the game, you display the gameoverscreen
 public class GameOverScreen implements Screen, InputProcessor {
     private JellyJuggler parent;
     private Stage stage;
-    private Texture gameOverText;
+    private Texture gameOverText; // The image that will hold the game over picture
 
     public GameOverScreen(JellyJuggler parent){
-        this.parent=parent;
-        stage=new Stage(new ScreenViewport());
+        this.parent=parent; // Initializing the parent (Jelly Juggler)
+        stage=new Stage(new ScreenViewport()); // A stage that contains actors which are the jellies
         gameOverText=new Texture(Gdx.files.internal("gameOver.png"));
     }
-
+    // Show the gameover screen as the current screen.
     @Override
     public void show() {
         Gdx.input.setInputProcessor(this);
 
     }
-
+    // Render is called when the screen should make itself
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);

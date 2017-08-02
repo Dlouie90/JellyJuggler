@@ -26,12 +26,12 @@ public class JellyJuggler extends Game {
 	public static float SCREEN_WIDTH;
 	public static float SCREEN_HEIGHT;
 	public static Integer playerScore=0;
-	public AdsController adsController;
+	public AdsController adsController; // For the ads
 
 	public Music menuMusic;
 
     public static Texture background;
-
+// If adscontroller is null, then adsController is dummyadscontroller
 	public JellyJuggler(AdsController adsController){
 		if(adsController!=null)
 			this.adsController=adsController;
@@ -44,15 +44,16 @@ public class JellyJuggler extends Game {
 	public void create () {
 		SCREEN_WIDTH =Gdx.graphics.getWidth();
 		SCREEN_HEIGHT=Gdx.graphics.getHeight();
-
+		// Setting the music loop here
 		menuMusic= Gdx.audio.newMusic(Gdx.files.internal("forest.wav"));
 		menuMusic.setLooping(true);
 		menuMusic.play();
-
+		// Creating AppPreferences
 		preferences = new AppPreferences();
-        background=new Texture(Gdx.files.internal("bg.jpg"));
+        // Setting the background
+		background=new Texture(Gdx.files.internal("bg.jpg"));
 
-
+		// Setting the menu screen on creation of the app
 		menuScreen=new MenuScreen(this);
 		setScreen(menuScreen);
 

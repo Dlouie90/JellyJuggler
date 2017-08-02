@@ -255,26 +255,29 @@ public class GameScreen implements Screen,InputProcessor {
     public boolean keyTyped(char character) {
         return false;
     }
-
+    // When a jelly is touched
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         testPoint.set(screenX, screenY, 0);
         cam.unproject(testPoint);
         hitBody = null;
+        // AABB means Axis Aligned Bounding Box
         model.world.QueryAABB(new QueryCallback() {
                                   @Override
                                   public boolean reportFixture(Fixture fixture) {
                                       if(fixture.getBody().getType()== BodyDef.BodyType.StaticBody){
                                           return false;
                                       }
-                                      hitBody = fixture.getBody();
-                                      hitBody.setLinearVelocity(0, 0);
-                                      hitBody.applyForceToCenter(new Vector2(rng.nextInt(20000) - 10000, 30000), true);
+                                      hitBody = fixture.getBody(); //Get the body that is hit
+                                      hitBody.setLinearVelocity(0, 0); // Set it to no velocity
+                                      hitBody.applyForceToCenter(new Vector2(rng.nextInt(20000) - 10000, 30000), true); // applying force
                                       parent.playerScore++;
+                                      // Sound
                                       if(hitBody.getUserData().equals(0)||hitBody.getUserData().equals(2)) {
                                           if (parent.getPreferences().isSoundEnabled())
                                               bounceSnd.play();
                                       }
+                                      // Frost Jelly is hit
                                       else if (hitBody.getUserData().equals(1)) {
                                           // Playing the sound
                                           if(parent.getPreferences().isSoundEnabled())
@@ -291,6 +294,7 @@ public class GameScreen implements Screen,InputProcessor {
                                           }
                                       }
                                       else
+                                          // Exploding Jelly
                                       if (hitBody.getUserData().equals(3)) {
                                           if(parent.getPreferences().isSoundEnabled())
                                               explodeSnd.play();

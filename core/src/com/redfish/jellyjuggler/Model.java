@@ -12,17 +12,17 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
+// The class that has the Box2D world and creates the model of the jellyjuggler world
 public class Model {
-    public World world;
+    public World world; // The world that manages all the physics
     private Box2DDebugRenderer debugRenderer;
-    private OrthographicCamera camera;
+    private OrthographicCamera camera; // camera that is not used
     private Body bodyd;
     public static boolean gameOver;
 
     public Model(){
         world = new World(new Vector2(0,-10f), true);
-        world.setContactListener(new ContactListeners(this));
+        world.setContactListener(new ContactListeners(this)); // Setting contactlisteners
 
 
         createFloor(-25);
@@ -36,7 +36,7 @@ public class Model {
 
     }
 
-
+    // Creating a ceiling for the game
     private void createCeiling(int x) {
 
         BodyDef bodyDef = new BodyDef();
@@ -54,6 +54,7 @@ public class Model {
 
         shape.dispose();
     }
+    // Floor creation
     private void createFloor(int x) {
 
 
@@ -73,7 +74,7 @@ public class Model {
 
         shape.dispose();
     }
-
+    // Creating two walls left and right
     private void createWalls(int x) {
 
 
@@ -94,7 +95,7 @@ public class Model {
 
         shape.dispose();
     }
-
+    // The time step for the world which is delta time, 3 velocity iterations and 3 position iterations
     public void logicStep(float delta){
 
         world.step(delta , 3, 3);
